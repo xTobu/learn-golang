@@ -1,23 +1,4 @@
-//gin
-// package main
-
-// import (
-// 	"github.com/gin-gonic/gin"
-// )
-
-// func main() {
-// 	r := gin.Default()
-// 	r.GET("/ping", func(c *gin.Context) {
-// 		c.JSON(200, gin.H{
-// 			"message": "pong",
-// 		})
-// 	})
-// 	r.Run() // listen and serve on 0.0.0.0:8080
-// }
-
-//http://www.jb51.net/article/127805.htm
-
-package main
+package middleware
 
 import (
 	"database/sql"
@@ -25,15 +6,13 @@ import (
 	"log"
 	"time"
 
-	"./server/router/middleware"
-	_ "github.com/denisenkom/go-mssqldb"
+	"github.com/gin-gonic/gin"
 )
 
-func main() {
-	//router.Init() // init router
-	var m = middleware.Model()
-	fmt.Println(m)
-
+//Mssql https://studygolang.com/articles/8314
+// An existing connection was forcibly closed by the remote host https://studygolang.com/topics/1694
+//连接字符串加上 “encrypt=disable;” 试试
+func Mssql(c *gin.Context) {
 	var isdebug = true
 	var server = "211.78.85.202"
 	// var port = 1234

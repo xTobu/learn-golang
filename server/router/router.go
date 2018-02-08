@@ -3,7 +3,9 @@ package router
 import (
 	"net/http"
 
-	"../handlers"
+	"./handlers"
+	"./handlers/vue"
+	"./middleware"
 	"github.com/gin-gonic/gin"
 )
 
@@ -11,6 +13,11 @@ import (
 func Init() {
 	// Creates a default gin router
 	router := gin.Default() // Grouping routes
+	router.Use(middleware.PrintMiddleware)
+	router.Use(middleware.Print())
+	//根據website的路由規則
+	router.LoadHTMLGlob("templates/*")
+
 	// group： v1
 	v1 := router.Group("/v1")
 	{
@@ -32,18 +39,34 @@ func Init() {
 		})
 	}
 
-	//根據website的路由規則
-	router.LoadHTMLGlob("templates/*")
+	//group： v2
 	v2 := router.Group("/v2")
+	v2.Use(middleware.ValidateToken())
 	{
 		v2.GET("/index", func(c *gin.Context) {
 			c.HTML(http.StatusOK, "index.html", gin.H{"title": "hello Gin."})
 		})
 
 	}
+
+	//vue
+	// router.GET("/vue", handlersVue.Student)
+	//group： vue
+	vue := router.Group("/vue")
+	{
+		vue.GET("", handlersVue.Student)
+
+	}
+	//group： vue
+	// vue := router.Group("/vue")
+	// vue.Use(middleware.ValidateToken())
+	// {
+	// 	vue.GET("", handlersVue.Student)
+
+	// }
+
 	// 404 NotFound
 	router.NoRoute(func(c *gin.Context) {
-		//https://golang.org/src/net/http/status.go
 		c.HTML(200, "404.html", gin.H{})
 	})
 
