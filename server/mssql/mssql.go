@@ -1,4 +1,4 @@
-package middleware
+package mssql
 
 import (
 	"database/sql"
@@ -6,21 +6,25 @@ import (
 	"log"
 	"time"
 
-	"github.com/gin-gonic/gin"
+	"../mssql_config"
+
+	//go-mssqldb
+	_ "github.com/denisenkom/go-mssqldb"
 )
 
-//Mssql https://studygolang.com/articles/8314
+//Init MSSQL https://studygolang.com/articles/8314
 // An existing connection was forcibly closed by the remote host https://studygolang.com/topics/1694
 //连接字符串加上 “encrypt=disable;” 试试
-func Mssql(c *gin.Context) {
-	var isdebug = true
-	var server = "211.78.85.202"
+func Init() {
+
+	var isdebug = mssqlconfig.IsDebug
+	var server = mssqlconfig.Server
+	var user = mssqlconfig.User
+	var password = mssqlconfig.Password
+	var database = mssqlconfig.Database
+	var encrypt = mssqlconfig.Encrypt
 	// var port = 1234
 
-	var user = "junxiang"
-	var password = "WPE8yxwq"
-	var database = "junxiang_db"
-	var encrypt = "disable"
 	//连接字符串
 	// connString := fmt.Sprintf("server=%s;port%d;database=%s;user id=%s;password=%s", server, port, database, user, password)
 	connString := fmt.Sprintf("server=%s;database=%s;user id=%s;password=%s;encrypt=%s;", server, database, user, password, encrypt)

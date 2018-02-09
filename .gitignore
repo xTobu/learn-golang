@@ -10,4 +10,5 @@ yarn-error.log
 *.ntvs*
 *.njsproj
 *.sln
-server/router/middleware/config.go
+
+server/mssql_config/config.go
