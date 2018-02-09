@@ -65,7 +65,8 @@ func Init() {
 	api := router.Group("/api")
 	{
 		api.GET("/student", handlersApi.Student)
-
+		api.GET("/student2", handlersApi.Student2)
+		api.POST("/insert", handlersApi.Insert)
 	}
 
 	// 404 NotFound
