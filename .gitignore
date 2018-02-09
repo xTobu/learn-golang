@@ -12,3 +12,4 @@ yarn-error.log
 *.sln
 
 server/mssql_config/config.go
+server/router/handlers/api/sqldb/config.go

@@ -3,9 +3,12 @@ package router
 import (
 	"net/http"
 
+	"../router/handlers/api"
 	"./handlers"
 	"./handlers/vue"
 	"./middleware"
+	//go-mssqldb
+	_ "github.com/denisenkom/go-mssqldb"
 	"github.com/gin-gonic/gin"
 )
 
@@ -55,15 +58,15 @@ func Init() {
 	vue := router.Group("/vue")
 	{
 		vue.GET("", handlersVue.Student)
+		vue.GET("/mssql", handlersVue.GetData)
 
 	}
-	//group： vue
-	// vue := router.Group("/vue")
-	// vue.Use(middleware.ValidateToken())
-	// {
-	// 	vue.GET("", handlersVue.Student)
+	//group：api
+	api := router.Group("/api")
+	{
+		api.GET("/student", handlersApi.Student)
 
-	// }
+	}
 
 	// 404 NotFound
 	router.NoRoute(func(c *gin.Context) {

@@ -8,7 +8,7 @@ import (
 
 // PrintMiddleware is a function for test middleware
 func PrintMiddleware(c *gin.Context) {
-	fmt.Println("before request")
+	fmt.Println("PrintMiddleware")
 	c.Next()
 }
 

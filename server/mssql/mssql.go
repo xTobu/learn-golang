@@ -50,6 +50,7 @@ func Init() {
 	if err != nil {
 		log.Fatal("Query failed:", err.Error())
 	}
+	defer rows.Close()
 
 	//建立一个列数组
 	cols, err := rows.Columns()
