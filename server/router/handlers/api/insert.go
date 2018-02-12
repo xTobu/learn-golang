@@ -18,7 +18,7 @@ import (
 // 	CreatedTime string `json:"CreatedTime,omitempty"`
 // }
 
-//Insert handler
+//Insert handler 新增一筆學生資料
 func Insert(c *gin.Context) {
 	name := c.Request.FormValue("name")
 	email := c.Request.FormValue("email")
@@ -40,4 +40,19 @@ func Insert(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{
 		"result": "success",
 	})
+}
+
+//Insert2 handler 新增一筆學生資料
+func Insert2(c *gin.Context) {
+
+	if r := sqldb.DBInsertStudent(c.Request.FormValue("name"), c.Request.FormValue("email")); r == true {
+		c.JSON(http.StatusOK, gin.H{
+			"result": "success",
+		})
+	} else {
+		c.JSON(http.StatusOK, gin.H{
+			"result": "fail",
+		})
+		// c.JSON(http.StatusNoContent)
+	}
 }

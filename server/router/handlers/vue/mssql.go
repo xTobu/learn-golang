@@ -6,7 +6,7 @@ import (
 	"log"
 	"net/http"
 
-	"../../../mssql"
+	//"../../../mssql"
 	//go mssql
 	_ "github.com/denisenkom/go-mssqldb"
 	"github.com/gin-gonic/gin"
@@ -14,8 +14,9 @@ import (
 
 //GetData handler
 func GetData(c *gin.Context) {
-	mssql.Init()
-	c.Header("Access-Control-Allow-Origin", "http://localhost:8080")
+	//mssql.Init()
+	// c.Header("Access-Control-Allow-Origin", "http://localhost:8080")
+	c.Header("Access-Control-Allow-Origin", "*")
 	c.Header("Access-Control-Allow-Headers", "access-control-allow-origin, access-control-allow-headers")
 	c.JSON(http.StatusOK, gin.H{
 		"student": "Student",

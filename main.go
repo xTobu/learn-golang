@@ -20,12 +20,12 @@
 package main
 
 import (
-	"./server/mssql"
+	// "./server/mssql"
 	"./server/router"
 )
 
 func main() {
 	router.Init() // init router
-	mssql.Init()
+	// mssql.Init()
 
 }

@@ -67,6 +67,7 @@ func Init() {
 		api.GET("/student", handlersApi.Student)
 		api.GET("/student2", handlersApi.Student2)
 		api.POST("/insert", handlersApi.Insert)
+		api.POST("/insert2", handlersApi.Insert2)
 	}
 
 	// 404 NotFound

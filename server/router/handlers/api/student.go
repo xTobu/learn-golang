@@ -54,6 +54,14 @@ func Student2(c *gin.Context) {
 		n := sqldb.StudentS{res}
 		c.JSON(http.StatusOK, n)
 	} else {
+		n := sqldb.StudentS{}
+		c.JSON(http.StatusOK, n)
 		// c.JSON(http.StatusNoContent)
 	}
+	// if res, count := sqldb.DBGetStudents(); res != nil {
+	// 	if cou := count; cou >= 0 {
+	// 		n := sqldb.StudentS{res}
+	// 		c.JSON(http.StatusOK, n)
+	// 	}
+	// }
 }

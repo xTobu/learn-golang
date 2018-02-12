@@ -2,6 +2,7 @@ package sqldb
 
 import (
 	"database/sql"
+	"fmt"
 
 	"log"
 )
@@ -19,7 +20,7 @@ func dbGetConn() *sql.DB {
 	return db
 }
 
-// DBGetStudents 123
+// DBGetStudents 取得所有學生資料
 func DBGetStudents() (data []Student, count int) {
 	db := dbGetConn()
 	defer db.Close()
@@ -40,6 +41,31 @@ func DBGetStudents() (data []Student, count int) {
 	if err = rows.Err(); err != nil {
 		log.Fatalln(err)
 	}
-
+	getTime()
 	return data, count
+}
+
+// DBInsertStudent 新增一筆學生資料
+func DBInsertStudent(name string, email string) (r bool) {
+
+	// name := c.Request.FormValue("name")
+	// email := c.Request.FormValue("email")
+	//name = "A"
+	//email = "B"
+
+	//開啟db
+	db := dbGetConn()
+	defer db.Close()
+
+	query := fmt.Sprintf("INSERT INTO [dbo].[vueStudent] ([name],[email],[CreatedTime]) VALUES('%s','%s','%s')", name, email, getTime())
+	result, err := db.Query(query)
+	defer result.Close()
+
+	if err != nil {
+		log.Fatalln(err)
+	}
+
+	r = true
+	return r
+
 }
